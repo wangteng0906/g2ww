@@ -65,7 +65,8 @@ func GwWorker() func(c *fiber.Ctx) {
 		}
 
 		url := "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=" + c.Params("key")
-
+		var bingo string 
+		bingo = time.Now().Format("2006-01-02 15:04:05")
 		msgStr := fmt.Sprintf(`
 		{
 			"msgtype": "news",
@@ -75,12 +76,12 @@ func GwWorker() func(c *fiber.Ctx) {
 				  "title": "%s",
 				  "description": "%s",
 				  "url": "%s",
-				  "picurl": "%s"
+				  "picurl": "https://img-blog.csdnimg.cn/f7af9a12333c41ce9b839c4bf4ed646c.jpeg"
 				}
 			  ]
 			}
 		  }
-		`, h.Title, h.Message+processMatches(h.EvalMatches), strings.Replace(h.RuleUrl, "editPanel=", "viewPanel=", -1), h.ImageUrl)
+		`, h.Title, h.Message+"\n"+processMatches(h.EvalMatches)+"\n"+"时    间:"+bingo, strings.Replace(h.RuleUrl, "editPanel=", "viewPanel=", -1))
 		fmt.Println(time.Now().Format("2006-01-02 15:04:05") + msgStr)
 		jsonStr := []byte(msgStr)
 		req, err := http.NewRequest("POST", url, bytes.NewBuffer(jsonStr))
