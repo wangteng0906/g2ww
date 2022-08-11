@@ -1,4 +1,4 @@
-Code based on https://github.com/n0vad3v/g2ww.
+Code based on (https://github.com/wangteng0906/g2ww.git).
 After modification, an alarm trigger metric is added to the message content.
 # G2WW (Grafana 2 Wechat Work)
 > Proxy Grafana Webhook alert to WeChat Work.
@@ -26,7 +26,7 @@ Like this:
 ```
 server {
         listen 80;
-        server_name g2ww.nova.moe;
+        server_name localhost;
 
         location / {
             proxy_pass http://127.0.0.1:2408;
